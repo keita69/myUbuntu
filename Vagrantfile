@@ -5,9 +5,11 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder ".\\vagrant_data", "/home/vagrant", type: "nfs", nfs_export: true, nfs_version: 3
   config.vm.network "private_network", ip: "192.168.33.10"
   config.vm.network "forwarded_port", guest: 8065, host: 8065
-
+  # REQUIRE PLUGIN > vagrant plugin install vagrant-disksize 
+  # https://qiita.com/yut_h1979/items/c84c490053877beee5c1
+  config.disksize.size = '100GB'
   config.vm.provider "virtualbox" do |vb|
-  #   vb.gui = true
+    vb.gui = false
     vb.memory = "4096"
   # https://akamist.com/blog/archives/520
     vb.customize ["modifyvm", :id, "--nictype1",  "virtio"]
